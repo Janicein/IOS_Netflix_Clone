@@ -18,6 +18,7 @@
 		183E498C2A54138A000E0C78 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E498B2A54138A000E0C78 /* DownloadsViewController.swift */; };
 		183E49932A55658B000E0C78 /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E49922A55658B000E0C78 /* CollectionViewTableViewCell.swift */; };
 		183E49952A569F5C000E0C78 /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E49942A569F5C000E0C78 /* HeroHeaderUIView.swift */; };
+		183E49972A594959000E0C78 /* API caller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183E49962A594959000E0C78 /* API caller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		183E498B2A54138A000E0C78 /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		183E49922A55658B000E0C78 /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
 		183E49942A569F5C000E0C78 /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
+		183E49962A594959000E0C78 /* API caller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API caller.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		183E49912A556531000E0C78 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				183E49962A594959000E0C78 /* API caller.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183E49972A594959000E0C78 /* API caller.swift in Sources */,
 				183E498A2A541356000E0C78 /* SearchViewController.swift in Sources */,
 				183E49752A540641000E0C78 /* MainTabBarViewController.swift in Sources */,
 				183E49932A55658B000E0C78 /* CollectionViewTableViewCell.swift in Sources */,
