@@ -47,14 +47,21 @@ class TitleTableViewCell: UITableViewCell {
             titlesPosterUIImageView.widthAnchor.constraint(equalToConstant: 100)
         ]
         
+        let titleLabelConstraints = [
+            titleLabel.leadingAnchor.constraint(equalTo: titlesPosterUIImageView.trailingAnchor, constant: 20),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ]
         NSLayoutConstraint.activate(titlesPosterUIImageViewConstraints)
+        NSLayoutConstraint.activate(titleLabelConstraints)
     }
     
     public func configure(with model: TitleViewModel){
-        guard let url = URL(string: model.posterURL) else {
+
+        guard let url =  URL(string: "https://image.tmdb.org/t/p/w500/\(model.posterURL)") else{
             return
         }
-        titlesPosterUIImageView.sd_setimage(with: url, completed: nil)
+        
+        titlesPosterUIImageView.sd_setImage(with: url, completed: nil)
         titleLabel.text = model.titleName
     }
     
