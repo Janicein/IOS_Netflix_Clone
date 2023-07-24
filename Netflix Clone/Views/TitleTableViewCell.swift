@@ -12,8 +12,13 @@ class TitleTableViewCell: UITableViewCell {
     
     private let playTitleButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "play.circle"), for: .normal)
+        let image = UIImage(systemName:  "play.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
+        button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+    
+        button.tintColor = .white
+        
         return button
     }()
     
@@ -27,6 +32,8 @@ class TitleTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        //prevent each poster overflowing the container
+        imageView.clipsToBounds = true
         return imageView
         
     }()
@@ -43,8 +50,8 @@ class TitleTableViewCell: UITableViewCell {
     private func applyConstraints(){
         let titlesPosterUIImageViewConstraints = [
             titlesPosterUIImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titlesPosterUIImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            titlesPosterUIImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            titlesPosterUIImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            titlesPosterUIImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             titlesPosterUIImageView.widthAnchor.constraint(equalToConstant: 100)
         ]
         
