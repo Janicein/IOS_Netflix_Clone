@@ -11,6 +11,8 @@ import Foundation
 struct Constants {
     static let API_KEY = "81ca08c6c5b06843ff4f86c980f2c08f"
     static let baseURL = "https://api.themoviedb.org"
+    static let YoutubeAPI_KEY = "AIzaSyCORZ9HXVrwx7UW2pnzHzt4kqLSFGQn73c"
+    static let YoutubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
 }
 
 
@@ -32,6 +34,7 @@ class APICaller {
                 return
             }
             
+//            print(data)
             do{
                 let results = try JSONDecoder().decode(TrendingTitleResponse.self, from: data)
                 completion(.success(results.results))
@@ -167,6 +170,28 @@ class APICaller {
         
         task.resume()
         
+    }
+    
+    func getMovie(with query: String, completion: @escaping (Result<VideoElement,Error>)-> Void){
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
+        guard let url = URL(string: "\(Constants.YoutubeBaseURL)q=\(query)&key=\(Constants.YoutubeAPI_KEY)") else {return}
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)){ data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do{
+                let results = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data)
+                completion(.success(results.items[0]))
+            } catch {
+                completion(.failure(error))
+                print(error.localizedDescription)
+            }
+        }
+        
+        task.resume()
+   
     }
     
 }
