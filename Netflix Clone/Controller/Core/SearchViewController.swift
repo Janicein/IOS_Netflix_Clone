@@ -107,7 +107,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate{
                     let vc = TitlePreviewViewController()
                     vc.configure(with: TitlePreviewViewModel(title: titleName, youtubeView: videoElement, titleOverview: title.overview ?? ""))
                     self.navigationController?.pushViewController(vc, animated: true)
-                    
+
                 }
 
             case .failure(let error):
@@ -117,7 +117,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating{
+extension SearchViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate{
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         
@@ -127,6 +127,8 @@ extension SearchViewController: UISearchResultsUpdating{
               let resultsController = searchController.searchResultsController as? SearchResultsViewController else {
             return
         }
+        
+        resultsController.delegate = self
         
         APICaller.shared.search(with: query){ result in
             DispatchQueue.main.async {
@@ -141,5 +143,16 @@ extension SearchViewController: UISearchResultsUpdating{
             
         }
             
+    }
+    
+    func SearchResultsViewControllerDidTapItem(_ viewModel: TitlePreviewViewModel) {
+        
+        DispatchQueue.main.async {[weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+
+        
     }
 }
