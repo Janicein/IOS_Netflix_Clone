@@ -8,7 +8,7 @@
 import UIKit
 
 class DownloadsViewController: UIViewController {
-    private let titles: [TitleItem] = [TitleItem]()
+    private var titles: [TitleItem] = [TitleItem]()
     
     private let downloadTable: UITableView = {
         let table = UITableView()
@@ -23,10 +23,34 @@ class DownloadsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         title = "Downloads"
+        view.addSubview(downloadTable)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         downloadTable.delegate = self
         downloadTable.dataSource = self
+        fetchLocalStorageForDownload()
+        
+    }
+    
+    
+    private func fetchLocalStorageForDownload(){
+        DataPersistenceManager.shared.fetchingTitlesFromDataBase{ [weak self] result in
+            switch result {
+            case .success(let titles):
+                self?.titles = titles
+                DispatchQueue.main.async {
+                    self?.downloadTable.reloadData()
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        downloadTable.frame = view.bounds
     }
     
 
